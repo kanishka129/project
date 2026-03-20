@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCA Quiz | BCA Study Hub</title>
+
+<style>
+*{ box-sizing:border-box; }
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5faff;
+}
+
+/* ================= HEADER ================= */
+header{
+    width:100%;
+    background:#ffffff;
+    padding:12px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.15);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+/* LOGO */
+.logo-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.logo-box img{
+    width:60px;
+    height:60px;
+}
+.logo-box span{
+    color:#00a7b3;
+    font-size:26px;
+    font-weight:bold;
+}
+.logo-text{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+.site-name{
+    color: #00a7b3;
+    font-size:26px;
+    font-weight:bold;
+}
+.university-name{
+    font-size: 13px;
+    color:#555;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+/* HAMBURGER */
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+    user-select: none;
+}
+
+/* NAV */
+nav ul{
+    list-style:none;
+    margin:0;
+    padding-right: 30px;
+    display:flex;
+    gap: 15px;
+}
+nav ul li{
+    margin-left:25px;
+}
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+    padding:8px 12px;
+    border-radius:5px;
+}
+nav a:hover{
+    background:#00a7b3;
+    color:white;
+}
+
+/* TOOLTIP */
+/* Tooltip meaning */
+nav ul li{
+    position:relative; /* important */
+}
+
+.tooltip-text{
+    visibility:hidden;
+    opacity:0;
+    position:absolute;
+    top:45px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#00a7b3;
+    color:white;
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:13px;
+    white-space:nowrap;
+    transition:0.3s;
+    font-weight: bold;
+}
+
+/* Hover pannina meaning show */
+nav ul li:hover .tooltip-text{
+    visibility:visible;
+    opacity:1;
+}
+/* ================= HERO ================= */
+.page-hero{
+    padding:70px 20px 160px;
+    text-align:center;
+    background:linear-gradient(to top,#00a7b3,#d8eef5,#ffffff);
+    color:#003c80;
+}
+
+.hero-top{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.hero-icon{ width:32px; }
+
+.breadcrumb{
+    font-size:14px;
+    color:#004c66;
+}
+
+.page-hero h1{
+    font-size:36px;
+    margin-bottom:14px;
+}
+
+.hero-sub{
+    font-size:17px;
+    max-width:720px;
+    margin:0 auto;
+    color:#004c66;
+}
+
+/* ================= FLOATING SYLLABUS BOXES ================= */
+.hero-float-steps{
+    max-width:900px;
+    margin:-80px auto 50px;
+    display:flex;
+    gap:22px;
+    padding:0 15px;
+    position:relative;
+    z-index:10;
+}
+
+.step-card{
+    flex:1;
+    background:white;
+    padding:20px 18px 22px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 16px 36px rgba(0,0,0,.18);
+    position:relative;
+    transition:.3s;
+    overflow:hidden;
+}
+
+.step-card:hover{
+    transform:translateY(-6px);
+}
+
+.step-card::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(to right,#00a7b3,#007d86);
+}
+
+.hero-float-steps .step-card:nth-child(2){
+    transform:translateY(-12px);
+    box-shadow:0 22px 48px rgba(0,0,0,.22);
+}
+
+.step-icon{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.step-card h3{
+    margin:10px 0 6px;
+    font-size:17px;
+    color:#212c91;
+}
+
+.step-card h3::after{
+    content:"";
+    display:block;
+    width:46px;
+    height:3px;
+    background:#00a7b3;
+    margin:8px auto;
+    border-radius:5px;
+}
+
+.step-card p{
+    font-size:14px;
+    color:#555;
+    line-height:1.5;
+}
+
+/* ================= SYLLABUS CARDS ================= */
+.syllabus-section{
+    padding:60px 20px;
+    text-align:center;
+}
+
+.syllabus-section h2{
+    font-size:32px;
+    color:#003c80;
+    margin-bottom:10px;
+}
+.syllabus-section p{
+    color:#555;
+    margin-bottom:40px;
+}
+
+.syllabus-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.syllabus-card{
+    background:white;
+    padding:35px 25px;
+    border-radius:20px;
+    box-shadow:0 8px 22px rgba(0,0,0,.15);
+    transition:.3s;
+}
+.syllabus-card:hover{
+    transform:translateY(-6px);
+}
+
+.syllabus-card h3{
+    color:#00a7b3;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.syllabus-card p{
+    color:#555;
+    font-size:15px;
+    margin-bottom:22px;
+}
+
+.syllabus-card a{
+    display:inline-block;
+    margin:6px;
+    padding:10px 22px;
+    background:#00a7b3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:14px;
+}
+.syllabus-card a.download{
+    background:#212c91;
+}
+.syllabus-card a:hover{
+    opacity:.9;
+}
+
+/* ================= FOOTER ================= */
+.footer{
+    background:black;
+    color:#fff;
+    text-align:center;
+    padding:35px 20px;
+    font-family:Arial, sans-serif;
+}
+
+.footer-logo img{
+    width:55px;
+}
+
+.footer-logo h2{
+    color:#00a7b3;
+    margin:8px 0 4px;
+}
+
+.tagline{
+    color:white;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.footer-line{
+    width:55%;
+    margin:18px auto;
+    border:1px solid white;
+}
+
+/* YEAR BADGE */
+.year-badge{
+    display:inline-block;
+    margin:5px 0 12px;   /* GAP REDUCED */
+    padding:5px 14px;
+    font-size:12px;
+    font-weight:600;
+    color:white;
+    border:1.5px solid white;
+    border-radius:16px;
+}
+
+/* DEVELOPED BY */
+.dev-title{
+    color:#00a7b3;
+    margin:10px 0 12px; /* GAP REDUCED */
+    font-size:16px;
+}
+
+/* TEAM */
+.team{
+    display:flex;
+    justify-content:center;
+    gap:18px;           /* GAP REDUCED */
+    flex-wrap:wrap;
+}
+
+.member{
+    width: 100px;
+}
+
+.member img{
+    width:90px;         /* PHOTO CLEAR-AA */
+    height:90px;
+    object-fit:cover;
+    border-radius:10px; /* ❌ CIRCLE REMOVED */
+    border:2px solid white;
+    box-shadow:0 4px 10px rgba(0,167,179,0.4);
+    transition:0.3s;
+}
+
+.member img:hover{
+    transform:scale(1.05);
+}
+
+.member p{
+    margin-top:6px;
+    font-size:14px;
+}
+
+/* ================= MOBILE FIX ================= */
+@media(max-width:768px){
+
+    /* NAVBAR */
+    .menu-toggle{
+        display:block;
+        font-size:28px;
+    }
+
+    nav{
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:white;
+        display:none;
+        z-index:998;
+        box-shadow:0 8px 15px rgba(0,0,0,0.15);
+    }
+
+    nav.show{
+        display:block;
+    }
+
+    nav ul{
+        flex-direction:column;
+        padding:10px 0;
+        text-align:center;
+    }
+
+    nav ul li{
+        border-bottom:1px solid #eee;
+    }
+
+    nav a{
+        padding:14px;
+        display:block;
+        font-size:16px;
+    }
+
+    .tooltip-text{
+        display:none;
+    }
+
+    /* HERO spacing fix */
+    .page-hero{
+        padding-top:55px;   /* 🔥 nav space remove */
+    }
+
+    .page-hero h1{
+        font-size:26px;
+    }
+
+    /* Floating cards */
+    .hero-float-steps{
+        flex-direction:column;
+        margin:-50px auto 40px;
+    }
+
+    .hero-float-steps .step-card:nth-child(2){
+        transform:none;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="logo-box">
+        <img src="img/logo.webp">
+        <div class="logo-text">
+        <span class="site-name">BCA STUDY HUB</span>
+        <div class="university-name">Bharathidasan university</div>
+    </div>
+    </div>
+
+    <div class="menu-toggle" id="menuBtn">☰</div>
+
+    <nav id="navMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="syllabus.html">Syllabus</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+            <li>
+                <a href="compiler.html">Compiler</a>
+                <div class="tooltip-text">Online Compiler</div>
+            </li>
+            <li>
+                <a href="previous.html">Previous QP</a>
+                <div class="tooltip-text">Previous Question Papers</div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<section class="page-hero">
+    <div class="hero-top">
+        <span class="breadcrumb">Home / Syllabus</span>
+    </div>
+
+    <h1>BCA Semester-wise Syllabus</h1>
+
+    <p class="hero-sub">
+        View complete BCA syllabus semester-wise with subject list,
+        unit breakdown and credit structure for exam preparation.
+    </p>
+</section>
+
+<section class="hero-float-steps">
+    <div class="step-card">
+        <div class="step-icon">📚</div>
+        <h3>Select Semester</h3>
+        <p>Choose a semester to view prescribed subjects and credits.</p>
+    </div>
+
+    <div class="step-card">
+        <div class="step-icon">📂</div>
+        <h3>View Subjects</h3>
+        <p>Access subject-wise syllabus with detailed unit structure.</p>
+    </div>
+
+    <div class="step-card">
+        <div class="step-icon">🧾</div>
+        <h3>Check Units</h3>
+        <p>Review unit topics to plan your study and exam preparation.</p>
+    </div>
+</section>
+<!-- SYLLABUS GRID -->
+<section class="syllabus-section">
+    <div class="syllabus-grid">
+        <div class="syllabus-card">
+            <h3>Semester 1</h3>
+            <p>Allied Mathematics and Programming in C.</p>
+            <a href="syllfile/sem1.pdf">View</a>
+            <a href="syllfile/sem1.pdf" class="download" download>Download</a>
+        </div>
+
+        <div class="syllabus-card">
+            <h3>Semester 2</h3>
+            <p>Allied subject and Java Programming.</p>
+            <a href="syllfile/Sem2.pdf">View</a>
+            <a href="syllfile/Sem2.pdf" class="download" download>Download</a>
+        </div>
+
+        <div class="syllabus-card">
+            <h3>Semester 3</h3>
+            <p>Allied Accounting and Python Programming.</p>
+            <a href="syllfile/Sem3.pdf">View</a>
+            <a href="syllfile/Sem3.pdf" class="download" download>Download</a>
+        </div>
+
+        <div class="syllabus-card">
+            <h3>Semester 4</h3>
+            <p>Database Management Systems.</p>
+            <a href="syllfile/Sem4.pdf">View</a>
+            <a href="syllfile/Sem4.pdf" class="download" download>Download</a>
+        </div>
+
+        <div class="syllabus-card">
+            <h3>Semester 5</h3>
+            <p>Algorithms, Networks, Web and Data Mining.</p>
+            <a href="syllfile/Sem5.pdf">View</a>
+            <a href="syllfile/Sem5.pdf"class="download" download>Download</a>
+        </div>
+
+        <div class="syllabus-card">
+            <h3>Semester 6</h3>
+            <p>PHP, IoT, Operating Systems and Project.</p>
+            <a href="syllfile/sem6.pdf">View</a>
+            <a href="syllfile/sem6.pdf" class="download" download>Download</a>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+
+    <div class="footer-logo">
+        <img src="img/logo.webp" alt="Logo">
+        <h2>BCA STUDY HUB</h2>
+        <p class="tagline">
+            <b>Your one-stop portal for BCA Notes, Syllabus, Programs & Resources.</b>
+        </p>
+    </div>
+
+    <hr class="footer-line">
+
+    <span class="year-badge">Academic Year 2023 – 2026</span>
+
+    <h3 class="dev-title">Developed By</h3>
+
+    <div class="team">
+        <div class="member">
+            <img src="img/Kani.jpeg">
+            <p>Rajeshwary S</p>
+        </div>
+
+        <div class="member">
+            <img src="img/Priya.jpeg">
+            <p>Priyadarshini S</p>
+        </div>
+
+        <div class="member">
+            <img src="img/Rishaba.jpeg">
+            <p>Rishaba V</p>
+        </div>
+
+        <div class="member">
+            <img src="img/Sowndarya.jpeg">
+            <p>Sowndarya S</p>
+        </div>
+    </div>
+</footer>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const navMenu = document.getElementById("navMenu");
+
+menuBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+});
+</script>
+</body>
+</html>
